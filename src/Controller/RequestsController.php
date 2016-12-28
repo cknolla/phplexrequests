@@ -175,7 +175,7 @@ class RequestsController extends AppController
 					if($item->seriesName == "** 403: Series Not Permitted **") {
 						continue;
 					}
-					$poster = $item->banner;
+					$poster = null;
 					$imageResponse = $http->get('https://api.thetvdb.com/series/'.$item->id.'/images/query', [
 						'keyType' => 'poster',
 					], [
