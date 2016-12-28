@@ -51,62 +51,7 @@ class RequestsController extends AppController
      */
     public function add()
     {
-    	$token = null;
-		$existingToken = \Cake\ORM\TableRegistry::get('Tokens')->find('all', [
-			'conditions' => [
-				'domain' => 'https://api.thetvdb.com',
-				'expires >' => new \Cake\I18n\Time('+6 hours'),
-			]
-		]);
-		if(!empty($existingToken)) {
-			$token = $existingToken->first()->value;
-		} else {
-			$credentials = [
-				'apikey' => getVariable('theTvDbApikey'),
-			];
-			$http = new \Cake\Http\Client();
-			$response = $http->post('https://api.thetvdb.com/login',
-				json_encode($credentials), [
-					'type' => 'json',
-				]);
-			$responseData = json_decode($response->body);
-			$token = $responseData->token;
-		}
-		$http = new \Cake\Http\Client();
-		$response = $http->get('https://api.thetvdb.com/search/series', [
-			'name' => 'Shark',
-		], [
-			'headers' => [
-				'Authorization' => 'Bearer '.$token,
-			]
-		]);
 
-		$results = json_decode($response->body);
-		$queryData = [];
-		if(empty($results->data)) {
-			debug("No results");
-		} else {
-			$queryData = $results->data;
-			foreach($queryData as $item) {
-				$poster = $item->banner;
-				$imageResponse = $http->get('https://api.thetvdb.com/series/'.$item->id.'/images/query', [
-					'keyType' => 'poster',
-				], [
-					'headers' => [
-						'Authorization' => 'Bearer '.$token,
-					]
-				]);
-				$imageData = json_decode($imageResponse->body);
-				if(!empty($imageData->data)) {
-					$poster = $imageData->data[0]->thumbnail;
-					$item->poster = $poster;
-				}
-
-				if(!empty($poster) and !file_exists('img/'. $poster)) {
-					copy("http://thetvdb.com/banners/" . $poster, 'img/' . $poster);
-				}
-			}
-		}
 
 
         $request = $this->Requests->newEntity();
@@ -121,7 +66,7 @@ class RequestsController extends AppController
             }
         }
         $issues = $this->Requests->Issues->find('list', ['limit' => 200]);
-        $this->set(compact('request', 'issues', 'queryData', 'poster'));
+        $this->set(compact('request', 'issues', 'queryData'));
         $this->set('_serialize', ['request']);
     }
 
@@ -172,4 +117,90 @@ class RequestsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function queryTv()
+	{
+		if ($this->request->is('Ajax')) {
+			$this->autoRender = false;
+			$result = [];
+			$result['success'] = 'no';
+			$searchString = $this->request->data('searchString');
+			$token = null;
+			$tokensTable = \Cake\ORM\TableRegistry::get('Tokens');
+			$existingToken = $tokensTable->find('all', [
+				'conditions' => [
+					'domain' => 'https://api.thetvdb.com',
+				]
+			])->first();
+			if(!empty($existingToken) and $existingToken->expires > new \Cake\I18n\Time('+1 hour')) {
+				$token = $existingToken->value;
+			} else {
+				if(!empty($existingToken)) {
+					$tokensTable->delete($existingToken);
+				}
+				$credentials = [
+					'apikey' => getVariable('theTvDbApikey'),
+				];
+				$http = new \Cake\Http\Client();
+				$response = $http->post('https://api.thetvdb.com/login',
+					json_encode($credentials), [
+						'type' => 'json',
+					]);
+				$responseData = json_decode($response->body);
+				$token = $responseData->token;
+				$tokenEntity = $tokensTable->newEntity();
+				$tokenEntity->domain = "https://api.thetvdb.com";
+				$tokenEntity->value = $token;
+				$tokenEntity->created = new \Cake\I18n\Time('now');
+				$tokenEntity->expires = new \Cake\I18n\Time('+24 hours');
+				$tokensTable->save($tokenEntity);
+			}
+			$http = new \Cake\Http\Client();
+			$response = $http->get('https://api.thetvdb.com/search/series', [
+				'name' => $searchString,
+			], [
+				'headers' => [
+					'Authorization' => 'Bearer '.$token,
+				]
+			]);
+
+			$results = json_decode($response->body);
+			$queryData = [];
+			if(empty($results->data)) {
+				$result['error'] = "No results";
+			} else {
+				$result['success'] = 'yes';
+				$queryData = $results->data;
+				foreach($queryData as $item) {
+					if($item->seriesName == "** 403: Series Not Permitted **") {
+						continue;
+					}
+					$poster = $item->banner;
+					$imageResponse = $http->get('https://api.thetvdb.com/series/'.$item->id.'/images/query', [
+						'keyType' => 'poster',
+					], [
+						'headers' => [
+							'Authorization' => 'Bearer '.$token,
+						]
+					]);
+					$imageData = json_decode($imageResponse->body);
+					if(!empty($imageData->data)) {
+						$poster = $imageData->data[0]->thumbnail;
+						$item->poster = $poster;
+					}
+
+					if(!empty($poster) and !file_exists('img/'. $poster)) {
+						copy("http://thetvdb.com/banners/" . $poster, 'img/' . $poster);
+					}
+					$result['shows'][] = $item;
+				}
+			}
+
+		} else {
+			die;
+		}
+
+		$this->response->body(json_encode($result));
+		return $this->response;
+	}
 }
