@@ -81,6 +81,8 @@ try {
     exit($e->getMessage() . "\n");
 }
 
+require __DIR__ . DS . 'helper_functions.php';
+
 /*
  * Load an environment local configuration file.
  * You can use a file like app_local.php to provide local overrides to your

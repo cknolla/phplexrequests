@@ -1,24 +1,71 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Requests'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Issues'), ['controller' => 'Issues', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Issue'), ['controller' => 'Issues', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+
 <div class="requests form large-9 medium-8 columns content">
-    <?= $this->Form->create($request) ?>
-    <fieldset>
-        <legend><?= __('Add Request') ?></legend>
-        <?php
-            echo $this->Form->input('user_id', ['options' => $users]);
-            echo $this->Form->input('approved');
-            echo $this->Form->input('available');
-            echo $this->Form->input('issues._ids', ['options' => $issues]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+
+	<div class="jumbotron">
+		<h2>Search</h2>
+			<?php
+			echo $this->Form->input('user_id', [
+				'type' => 'hidden',
+				'value' => '1',
+			]);
+			echo $this->Form->input('search', [
+				'type' => 'text',
+				'label' => false,
+				'class' => 'form-control',
+			]);
+			echo $this->Form->button('Submit', [
+				'id' => 'submit-button',
+			]);
+			?>
+	</div>
+
+	<div id="searchResults">
+		<?php foreach($queryData as $result): ?>
+			<div class="search-result">
+				<div class="row">
+					<div class="col-md-4">
+						<?php if(!empty($result->poster)): ?>
+							<img src="/img/<?= $result->poster?>" class="img-responsive">
+						<?php endif; ?>
+					</div>
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-xs-8 seriesName">
+								<?= $result->seriesName ?>
+							</div>
+							<div class="col-xs-4 requestButton">
+								<?= $this->Form->button('Request', [
+									'class' => 'btn btn-primary'
+								]); ?>
+							</div>
+						</div>
+						<div class="row seriesStats">
+							<div class="col-xs-4 firstAired">
+								<?= empty($result->firstAired) ? '&nbsp;' : substr($result->firstAired,0,4) ?>
+							</div>
+							<div class="col-xs-4 network">
+								<?= empty($result->network) ? '&nbsp;' : $result->network ?>
+							</div>
+							<div class="col-xs-4 status">
+								<?= empty($result->status) ? '&nbsp;' : $result->status ?>
+							</div>
+						</div>
+						<div class="row">
+							<?= empty($result->overview) ? '&nbsp;' : nl2br($result->overview) ?>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<hr>
+		<?php endforeach; ?>
+	</div>
 </div>
+
+<script>
+
+$("#submit-button").click(function() {
+	$("#searchResults").empty();
+});
+
+</script>

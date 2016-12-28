@@ -51,6 +51,64 @@ class RequestsController extends AppController
      */
     public function add()
     {
+    	$token = null;
+		$existingToken = \Cake\ORM\TableRegistry::get('Tokens')->find('all', [
+			'conditions' => [
+				'domain' => 'https://api.thetvdb.com',
+				'expires >' => new \Cake\I18n\Time('+6 hours'),
+			]
+		]);
+		if(!empty($existingToken)) {
+			$token = $existingToken->first()->value;
+		} else {
+			$credentials = [
+				'apikey' => getVariable('theTvDbApikey'),
+			];
+			$http = new \Cake\Http\Client();
+			$response = $http->post('https://api.thetvdb.com/login',
+				json_encode($credentials), [
+					'type' => 'json',
+				]);
+			$responseData = json_decode($response->body);
+			$token = $responseData->token;
+		}
+		$http = new \Cake\Http\Client();
+		$response = $http->get('https://api.thetvdb.com/search/series', [
+			'name' => 'Shark',
+		], [
+			'headers' => [
+				'Authorization' => 'Bearer '.$token,
+			]
+		]);
+
+		$results = json_decode($response->body);
+		$queryData = [];
+		if(empty($results->data)) {
+			debug("No results");
+		} else {
+			$queryData = $results->data;
+			foreach($queryData as $item) {
+				$poster = $item->banner;
+				$imageResponse = $http->get('https://api.thetvdb.com/series/'.$item->id.'/images/query', [
+					'keyType' => 'poster',
+				], [
+					'headers' => [
+						'Authorization' => 'Bearer '.$token,
+					]
+				]);
+				$imageData = json_decode($imageResponse->body);
+				if(!empty($imageData->data)) {
+					$poster = $imageData->data[0]->thumbnail;
+					$item->poster = $poster;
+				}
+
+				if(!empty($poster) and !file_exists('img/'. $poster)) {
+					copy("http://thetvdb.com/banners/" . $poster, 'img/' . $poster);
+				}
+			}
+		}
+
+
         $request = $this->Requests->newEntity();
         if ($this->request->is('post')) {
             $request = $this->Requests->patchEntity($request, $this->request->data);
@@ -62,9 +120,8 @@ class RequestsController extends AppController
                 $this->Flash->error(__('The request could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Requests->Users->find('list', ['limit' => 200]);
         $issues = $this->Requests->Issues->find('list', ['limit' => 200]);
-        $this->set(compact('request', 'users', 'issues'));
+        $this->set(compact('request', 'issues', 'queryData', 'poster'));
         $this->set('_serialize', ['request']);
     }
 

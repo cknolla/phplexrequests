@@ -23,3 +23,18 @@
 		</table>
 	</div>
 </div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">News</h3>
+	</div>
+	<div class="panel-body">
+		<?php foreach($newsStories as $news): ?>
+		<P class="news-subject"><?= $news->subject ?></P>
+		<P class="news-body">
+			<?= $news->body ?>
+		</P>
+		<hr>
+		<?php endforeach; ?>
+	</div>
+</div>

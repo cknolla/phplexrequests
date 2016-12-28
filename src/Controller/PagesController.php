@@ -56,7 +56,10 @@ class PagesController extends AppController
         if (!empty($path[1])) {
             $subpage = $path[1];
         }
-        $this->set(compact('page', 'subpage'));
+
+        $newsStories = \Cake\ORM\TableRegistry::get('News')->find('all');
+
+        $this->set(compact('page', 'subpage', 'newsStories'));
 
         try {
             $this->render(implode('/', $path));

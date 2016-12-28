@@ -72,7 +72,7 @@ $title = "Casey's Domain";
 			</button>
 			<?= $this->Html->link('PHPlexRequests', [
 				'controller' => 'Pages',
-				'action' => 'display' ],
+				'action' => 'home' ],
 			[
 				'class' => 'navbar-brand',
 

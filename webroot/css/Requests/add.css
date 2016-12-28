@@ -1,0 +1,41 @@
+div.search-result {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2rem;
+	padding: 1rem;
+}
+
+hr {
+	box-shadow: 0px 2px 5px grey;
+}
+/*
+div {
+	border-style: solid;
+	border-width: 1px;
+}
+*/
+img {
+	margin-left: auto;
+	margin-right: auto;
+	max-height: 300px;
+}
+
+.requestButton {
+	margin-top: 1rem;
+	text-align: center;
+}
+
+.seriesName {
+	font-size: 4rem;
+	font-weight: bold;
+}
+
+.seriesStats {
+	border-style: solid;
+	border-width: 0px 0px 1px 0px;
+}
+
+.firstAired, .network, .status {
+	font-size: 2rem;
+	text-align: center;
+}

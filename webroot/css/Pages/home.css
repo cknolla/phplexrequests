@@ -1,3 +1,11 @@
 th {
 	text-align: right;
 }
+
+P.news-subject {
+	font-weight: bold;
+}
+
+P.news-body {
+	margin-left: 2rem;
+}
