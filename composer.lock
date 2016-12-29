@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ff4b464cc5fcf2fbd4731d1f8d4cd00",
+    "hash": "0710f1d3f84dcd0a18ea4d1c088f70fa",
+    "content-hash": "11ffc1f427aa1e76e0691904ccc2d342",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -45,7 +46,7 @@
                 "aura",
                 "installer"
             ],
-            "time": "2012-11-26T21:35:57+00:00"
+            "time": "2012-11-26 21:35:57"
         },
         {
             "name": "aura/intl",
@@ -123,7 +124,7 @@
                 "l10n",
                 "localization"
             ],
-            "time": "2014-08-24T00:00:00+00:00"
+            "time": "2014-08-24 00:00:00"
         },
         {
             "name": "cakephp/cakephp",
@@ -196,7 +197,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-12-12T03:46:25+00:00"
+            "time": "2016-12-12 03:46:25"
         },
         {
             "name": "cakephp/chronos",
@@ -251,7 +252,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2016-12-21T21:09:39+00:00"
+            "time": "2016-12-21 21:09:39"
         },
         {
             "name": "cakephp/migrations",
@@ -301,7 +302,7 @@
                 "cakephp",
                 "migrations"
             ],
-            "time": "2016-11-14T21:54:46+00:00"
+            "time": "2016-11-14 21:54:46"
         },
         {
             "name": "cakephp/plugin-installer",
@@ -341,7 +342,214 @@
                 }
             ],
             "description": "A composer installer for CakePHP 3.0+ plugins.",
-            "time": "2016-04-28T03:01:34+00:00"
+            "time": "2016-04-28 03:01:34"
+        },
+        {
+            "name": "guzzlehttp/guzzle",
+            "version": "6.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "ebf29dee597f02f09f4d5bbecc68230ea9b08f60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/ebf29dee597f02f09f4d5bbecc68230ea9b08f60",
+                "reference": "ebf29dee597f02f09f4d5bbecc68230ea9b08f60",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/promises": "^1.0",
+                "guzzlehttp/psr7": "^1.3.1",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "^4.0",
+                "psr/log": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "6.2-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions_include.php"
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ],
+            "time": "2016-10-08 15:01:37"
+        },
+        {
+            "name": "guzzlehttp/promises",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/promises.git",
+                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/a59da6cf61d80060647ff4d3eb2c03a2bc694646",
+                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Promise\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle promises library",
+            "keywords": [
+                "promise"
+            ],
+            "time": "2016-12-20 10:07:11"
+        },
+        {
+            "name": "guzzlehttp/psr7",
+            "version": "1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/psr7.git",
+                "reference": "5c6447c9df362e8f8093bda8f5d8873fe5c7f65b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/5c6447c9df362e8f8093bda8f5d8873fe5c7f65b",
+                "reference": "5c6447c9df362e8f8093bda8f5d8873fe5c7f65b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "psr/http-message": "~1.0"
+            },
+            "provide": {
+                "psr/http-message-implementation": "1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Psr7\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "PSR-7 message implementation",
+            "keywords": [
+                "http",
+                "message",
+                "stream",
+                "uri"
+            ],
+            "time": "2016-06-24 23:00:38"
+        },
+        {
+            "name": "kryptonit3/couchpotato",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kryptonit3/CouchPotato.git",
+                "reference": "7a1fc892f70f120f74ff005850e923a0f1566376"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kryptonit3/CouchPotato/zipball/7a1fc892f70f120f74ff005850e923a0f1566376",
+                "reference": "7a1fc892f70f120f74ff005850e923a0f1566376",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kryptonit3\\CouchPotato\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jesse Szypulski",
+                    "email": "jesse.szypulski@gmail.com"
+                }
+            ],
+            "description": "PHP Wrapper for CouchPotato API",
+            "time": "2016-02-06 22:02:39"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -395,7 +603,7 @@
                 "mobile detector",
                 "php mobile detect"
             ],
-            "time": "2016-11-11T14:56:25+00:00"
+            "time": "2016-11-11 14:56:25"
         },
         {
             "name": "psr/http-message",
@@ -445,7 +653,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06T14:39:51+00:00"
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "psr/log",
@@ -492,7 +700,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10T12:19:37+00:00"
+            "time": "2016-10-10 12:19:37"
         },
         {
             "name": "robmorgan/phinx",
@@ -553,7 +761,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2016-03-07T14:09:22+00:00"
+            "time": "2016-03-07 14:09:22"
         },
         {
             "name": "symfony/config",
@@ -609,7 +817,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2016-12-09T07:45:17+00:00"
+            "time": "2016-12-09 07:45:17"
         },
         {
             "name": "symfony/console",
@@ -672,7 +880,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-12-11T14:34:22+00:00"
+            "time": "2016-12-11 14:34:22"
         },
         {
             "name": "symfony/debug",
@@ -729,7 +937,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-16T22:18:16+00:00"
+            "time": "2016-11-16 22:18:16"
         },
         {
             "name": "symfony/filesystem",
@@ -778,7 +986,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-24T00:46:43+00:00"
+            "time": "2016-11-24 00:46:43"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -837,7 +1045,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-11-14T01:06:16+00:00"
+            "time": "2016-11-14 01:06:16"
         },
         {
             "name": "symfony/yaml",
@@ -892,7 +1100,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-12-10T10:07:06+00:00"
+            "time": "2016-12-10 10:07:06"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -942,7 +1150,7 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2016-10-11T13:25:21+00:00"
+            "time": "2016-10-11 13:25:21"
         }
     ],
     "packages-dev": [
@@ -991,7 +1199,7 @@
                 "bake",
                 "cakephp"
             ],
-            "time": "2016-12-20T01:46:26+00:00"
+            "time": "2016-12-20 01:46:26"
         },
         {
             "name": "cakephp/debug_kit",
@@ -1048,7 +1256,7 @@
                 "debug",
                 "kit"
             ],
-            "time": "2016-12-22T20:40:05+00:00"
+            "time": "2016-12-22 20:40:05"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1081,7 +1289,7 @@
                 "MIT"
             ],
             "description": "implementation of xdg base directory specification for php",
-            "time": "2014-10-24T07:27:01+00:00"
+            "time": "2014-10-24 07:27:01"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -1124,7 +1332,7 @@
                     "homepage": "http://www.acci.cz"
                 }
             ],
-            "time": "2014-04-08T15:00:19+00:00"
+            "time": "2014-04-08 15:00:19"
         },
         {
             "name": "jakub-onderka/php-console-highlighter",
@@ -1168,7 +1376,7 @@
                     "homepage": "http://www.acci.cz/"
                 }
             ],
-            "time": "2015-04-20T18:58:01+00:00"
+            "time": "2015-04-20 18:58:01"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1218,7 +1426,7 @@
                 "highlight",
                 "sql"
             ],
-            "time": "2014-01-12T16:20:24+00:00"
+            "time": "2014-01-12 16:20:24"
         },
         {
             "name": "nikic/php-parser",
@@ -1269,7 +1477,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2016-12-06T11:30:35+00:00"
+            "time": "2016-12-06 11:30:35"
         },
         {
             "name": "psy/psysh",
@@ -1342,7 +1550,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2016-12-07T17:15:07+00:00"
+            "time": "2016-12-07 17:15:07"
         },
         {
             "name": "symfony/var-dumper",
@@ -1405,7 +1613,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2016-12-11T14:34:22+00:00"
+            "time": "2016-12-11 14:34:22"
         }
     ],
     "aliases": [],

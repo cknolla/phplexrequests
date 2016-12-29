@@ -8,6 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $user_id
+ * @property string $db_id
  * @property bool $approved
  * @property bool $available
  * @property \Cake\I18n\Time $created

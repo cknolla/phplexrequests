@@ -14,7 +14,7 @@
             "reference": "52f8de3670cc1ef45a916f40f732937436d028c8",
             "shasum": ""
         },
-        "time": "2012-11-26T21:35:57+00:00",
+        "time": "2012-11-26 21:35:57",
         "type": "composer-installer",
         "extra": {
             "class": "Aura\\Composer\\DefaultInstaller"
@@ -61,7 +61,7 @@
             "cakephp/cakephp-codesniffer": "dev-master",
             "composer/composer": "1.0.*@dev"
         },
-        "time": "2016-04-28T03:01:34+00:00",
+        "time": "2016-04-28 03:01:34",
         "type": "composer-installer",
         "extra": {
             "class": "Cake\\Composer\\Installer\\PluginInstaller"
@@ -107,7 +107,7 @@
             "johnkary/phpunit-speedtrap": "~1.0@dev",
             "phpunit/phpunit": "*"
         },
-        "time": "2016-11-11T14:56:25+00:00",
+        "time": "2016-11-11 14:56:25",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -158,7 +158,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-08-06T14:39:51+00:00",
+        "time": "2016-08-06 14:39:51",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -218,7 +218,7 @@
             "phpunit/phpunit": "^4.6 || ^5.5",
             "squizlabs/php_codesniffer": "^2.3.1"
         },
-        "time": "2016-10-11T13:25:21+00:00",
+        "time": "2016-10-11 13:25:21",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -263,7 +263,7 @@
             "aura/installer-default": "1.0.*",
             "php": ">=5.4.0"
         },
-        "time": "2014-08-24T00:00:00+00:00",
+        "time": "2014-08-24 00:00:00",
         "type": "aura-package",
         "extra": {
             "aura": {
@@ -347,7 +347,7 @@
             "cakephp/cakephp-codesniffer": "dev-master",
             "phpunit/phpunit": "*"
         },
-        "time": "2016-12-21T21:09:39+00:00",
+        "time": "2016-12-21 21:09:39",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -399,7 +399,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-10-10T12:19:37+00:00",
+        "time": "2016-10-10 12:19:37",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -475,7 +475,7 @@
         "suggest": {
             "ext-openssl": "To use Security::encrypt() or have secure CSRF token generation."
         },
-        "time": "2016-12-12T03:46:25+00:00",
+        "time": "2016-12-12 03:46:25",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -529,7 +529,7 @@
         "suggest": {
             "symfony/console": "For validating YAML files using the lint command"
         },
-        "time": "2016-12-10T10:07:06+00:00",
+        "time": "2016-12-10 10:07:06",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -588,7 +588,7 @@
             "symfony/class-loader": "~2.8|~3.0",
             "symfony/http-kernel": "~2.8|~3.0"
         },
-        "time": "2016-11-16T22:18:16+00:00",
+        "time": "2016-11-16 22:18:16",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -642,7 +642,7 @@
         "suggest": {
             "ext-mbstring": "For best performance"
         },
-        "time": "2016-11-14T01:06:16+00:00",
+        "time": "2016-11-14 01:06:16",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -714,7 +714,7 @@
             "symfony/filesystem": "",
             "symfony/process": ""
         },
-        "time": "2016-12-11T14:34:22+00:00",
+        "time": "2016-12-11 14:34:22",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -765,7 +765,7 @@
         "require": {
             "php": ">=5.5.9"
         },
-        "time": "2016-11-24T00:46:43+00:00",
+        "time": "2016-11-24 00:46:43",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -823,7 +823,7 @@
         "suggest": {
             "symfony/yaml": "To use the yaml reference dumper"
         },
-        "time": "2016-12-09T07:45:17+00:00",
+        "time": "2016-12-09 07:45:17",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -880,7 +880,7 @@
         "require-dev": {
             "phpunit/phpunit": "^3.7|^4.0|^5.0"
         },
-        "time": "2016-03-07T14:09:22+00:00",
+        "time": "2016-03-07 14:09:22",
         "bin": [
             "bin/phinx"
         ],
@@ -946,7 +946,7 @@
         "suggest": {
             "cakephp/bake": "Required if you want to generate migrations."
         },
-        "time": "2016-11-14T21:54:46+00:00",
+        "time": "2016-11-14 21:54:46",
         "type": "cakephp-plugin",
         "installation-source": "dist",
         "autoload": {
@@ -996,7 +996,7 @@
             "phpunit/phpunit": "3.7.*",
             "squizlabs/php_codesniffer": "1.*"
         },
-        "time": "2014-04-08T15:00:19+00:00",
+        "time": "2014-04-08 15:00:19",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1042,7 +1042,7 @@
             "phpunit/phpunit": "~4.0",
             "squizlabs/php_codesniffer": "~1.5"
         },
-        "time": "2015-04-20T18:58:01+00:00",
+        "time": "2015-04-20 18:58:01",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1083,7 +1083,7 @@
         "require-dev": {
             "phpunit/phpunit": "@stable"
         },
-        "time": "2014-10-24T07:27:01+00:00",
+        "time": "2014-10-24 07:27:01",
         "type": "project",
         "installation-source": "dist",
         "autoload": {
@@ -1119,7 +1119,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.0|~5.0"
         },
-        "time": "2016-12-06T11:30:35+00:00",
+        "time": "2016-12-06 11:30:35",
         "bin": [
             "bin/php-parse"
         ],
@@ -1175,7 +1175,7 @@
         "suggest": {
             "ext-symfony_debug": ""
         },
-        "time": "2016-12-11T14:34:22+00:00",
+        "time": "2016-12-11 14:34:22",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1251,7 +1251,7 @@
             "ext-readline": "Enables support for arrow-key history navigation, and showing and manipulating command history.",
             "hoa/console": "A pure PHP readline implementation. You'll want this if your PHP install doesn't already support readline or libedit."
         },
-        "time": "2016-12-07T17:15:07+00:00",
+        "time": "2016-12-07 17:15:07",
         "bin": [
             "bin/psysh"
         ],
@@ -1311,7 +1311,7 @@
         "require-dev": {
             "phpunit/phpunit": "3.7.*"
         },
-        "time": "2014-01-12T16:20:24+00:00",
+        "time": "2014-01-12 16:20:24",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1369,7 +1369,7 @@
         "suggest": {
             "ext-sqlite": "DebugKit needs to store panel data in a database. SQLite is simple and easy to use."
         },
-        "time": "2016-12-22T20:40:05+00:00",
+        "time": "2016-12-22 20:40:05",
         "type": "cakephp-plugin",
         "installation-source": "dist",
         "autoload": {
@@ -1425,7 +1425,7 @@
             "cakephp/cakephp-codesniffer": "^2.1",
             "phpunit/phpunit": "*"
         },
-        "time": "2016-12-20T01:46:26+00:00",
+        "time": "2016-12-20 01:46:26",
         "type": "cakephp-plugin",
         "installation-source": "dist",
         "autoload": {
@@ -1449,5 +1449,220 @@
             "bake",
             "cakephp"
         ]
+    },
+    {
+        "name": "guzzlehttp/promises",
+        "version": "v1.3.1",
+        "version_normalized": "1.3.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/guzzle/promises.git",
+            "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/guzzle/promises/zipball/a59da6cf61d80060647ff4d3eb2c03a2bc694646",
+            "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.0"
+        },
+        "time": "2016-12-20 10:07:11",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "GuzzleHttp\\Promise\\": "src/"
+            },
+            "files": [
+                "src/functions_include.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            }
+        ],
+        "description": "Guzzle promises library",
+        "keywords": [
+            "promise"
+        ]
+    },
+    {
+        "name": "guzzlehttp/psr7",
+        "version": "1.3.1",
+        "version_normalized": "1.3.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/guzzle/psr7.git",
+            "reference": "5c6447c9df362e8f8093bda8f5d8873fe5c7f65b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/guzzle/psr7/zipball/5c6447c9df362e8f8093bda8f5d8873fe5c7f65b",
+            "reference": "5c6447c9df362e8f8093bda8f5d8873fe5c7f65b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0",
+            "psr/http-message": "~1.0"
+        },
+        "provide": {
+            "psr/http-message-implementation": "1.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2016-06-24 23:00:38",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "GuzzleHttp\\Psr7\\": "src/"
+            },
+            "files": [
+                "src/functions_include.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            }
+        ],
+        "description": "PSR-7 message implementation",
+        "keywords": [
+            "http",
+            "message",
+            "stream",
+            "uri"
+        ]
+    },
+    {
+        "name": "guzzlehttp/guzzle",
+        "version": "6.2.2",
+        "version_normalized": "6.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/guzzle/guzzle.git",
+            "reference": "ebf29dee597f02f09f4d5bbecc68230ea9b08f60"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/ebf29dee597f02f09f4d5bbecc68230ea9b08f60",
+            "reference": "ebf29dee597f02f09f4d5bbecc68230ea9b08f60",
+            "shasum": ""
+        },
+        "require": {
+            "guzzlehttp/promises": "^1.0",
+            "guzzlehttp/psr7": "^1.3.1",
+            "php": ">=5.5"
+        },
+        "require-dev": {
+            "ext-curl": "*",
+            "phpunit/phpunit": "^4.0",
+            "psr/log": "^1.0"
+        },
+        "time": "2016-10-08 15:01:37",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "6.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/functions_include.php"
+            ],
+            "psr-4": {
+                "GuzzleHttp\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            }
+        ],
+        "description": "Guzzle is a PHP HTTP client library",
+        "homepage": "http://guzzlephp.org/",
+        "keywords": [
+            "client",
+            "curl",
+            "framework",
+            "http",
+            "http client",
+            "rest",
+            "web service"
+        ]
+    },
+    {
+        "name": "kryptonit3/couchpotato",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Kryptonit3/CouchPotato.git",
+            "reference": "7a1fc892f70f120f74ff005850e923a0f1566376"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Kryptonit3/CouchPotato/zipball/7a1fc892f70f120f74ff005850e923a0f1566376",
+            "reference": "7a1fc892f70f120f74ff005850e923a0f1566376",
+            "shasum": ""
+        },
+        "require": {
+            "guzzlehttp/guzzle": "^6.1"
+        },
+        "time": "2016-02-06 22:02:39",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Kryptonit3\\CouchPotato\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jesse Szypulski",
+                "email": "jesse.szypulski@gmail.com"
+            }
+        ],
+        "description": "PHP Wrapper for CouchPotato API"
     }
 ]

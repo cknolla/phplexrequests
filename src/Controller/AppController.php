@@ -43,6 +43,31 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+		$this->loadComponent('Auth', [
+			'authenticate' => [
+				'Form' => [
+					'fields' => [
+						'username' => 'username',
+						'password' => 'password'
+					]
+				]
+			],
+			'loginAction' => [
+				'controller' => 'Users',
+				'action' => 'login'
+			],
+			'authorize' => 'Controller',//[
+			//              'TinyAuth.Tiny' => [
+//                    'multiRole' => true,
+//                    'pivotTable' => 'users_roles',
+//                    'autoClearCache' => Configure::read('debug')
+//                ]
+			//     ],
+			//        'authError' => ,
+			'loginRedirect' => ['controller' => 'Pages', 'action' => 'home'],
+			'logoutRedirect' => ['controller' => 'Users', 'action' => 'login'],
+			'storage' => 'Session',
+		]);
 
 
         /*
@@ -69,4 +94,19 @@ class AppController extends Controller
 	//	$user = $this->Auth->user();
 	//	$this->set(compact('user'));
     }
+
+	public function isAuthorized($user = null)
+	{
+	/*	if (hasRole($user, 'admin')) {
+			$this->Flash->success('Access granted due to admin role');
+			return true;
+		}
+	*/	if (!$user['active']) {
+			$this->Flash->error('That user is no longer active');
+			$this->redirect(['controller' => 'Users', 'action' => 'logout']);
+		} else {
+			$this->Flash->error('You are not authorized to perform that action');
+		}
+		return false;
+	}
 }

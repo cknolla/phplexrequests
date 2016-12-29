@@ -70,4 +70,16 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
+
+	public function isAuthorized($user = null)
+	{
+		$action = $this->request->action;
+
+		if ($user['active']) {
+			if (in_array($action, ['home'])) {
+				return true;
+			}
+		}
+		return parent::isAuthorized($user);
+	}
 }

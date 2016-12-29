@@ -1,0 +1,71 @@
+nav.navbar.navbar-default {
+	position: relative;
+}
+
+#alerts {
+	/*margin-top: -2rem;*/
+	position: absolute;
+	top: 5rem;
+	left: 0px;
+	width: 100%;
+	z-index: 99;
+}
+
+.showAlert {
+	visibility: visible;
+	opacity: 1;
+	transition: visibility 0.3s, opacity 0.3s;
+}
+
+.hideAlert {
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0.3s, opacity 0.3s;
+}
+
+div.message {
+	cursor: pointer;
+	display: block;
+	border-radius: 1rem;
+	font-weight: normal;
+	padding: 1rem 1.5rem 1rem 1.5rem;
+	transition: height 300ms ease-out 0s;
+	background-color: #a0d3e8;
+	color: #626262;
+	position: fixed;
+	top: 5rem;
+	/* center the object on the screen */
+	left: 50%;
+	transform: translate(-50%, 0%);
+	z-index: 999;
+	/*    overflow: hidden; */
+	/*    height: 500px;  */
+	line-height: 2em;
+	animation: forwards;
+	animation-delay: 5s;
+	animation-duration: 2s;
+	animation-iteration-count: 1;
+	animation-direction: normal;
+	animation-timing-function: ease-in;
+	animation-name: disappear;
+}
+
+
+@keyframes disappear {
+	from {
+		opacity: 1.0;
+	}
+	to {
+		opacity: 0.0;
+	}
+}
+
+div.message.error {
+	background-color: #C3232D;
+	color: #FFF;
+
+}
+
+div.message.hidden {
+	height: 0;
+}

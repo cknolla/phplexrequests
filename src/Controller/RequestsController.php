@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Kryptonit3\CouchPotato\CouchPotato;
 
 /**
  * Requests Controller
@@ -254,5 +255,90 @@ class RequestsController extends AppController
 
 		$this->response->body(json_encode($result));
 		return $this->response;
+	}
+
+	public function requestMovie()
+	{
+		if ($this->request->is('Ajax')) {
+			$this->autoRender = false;
+			$result = [];
+			$result['requested'] = 'no';
+			$result['approved'] = 'no';
+			$imdbId = $this->request->data('imdbId');
+
+			$request = $this->Requests->find('all', [
+				'conditions' => [
+					'db_id' => $imdbId
+				]
+			])->first();
+			if(empty($request)) {
+				$request = $this->Requests->newEntity();
+				$request->user_id = 1;
+				$request->db_id = $imdbId;
+				if(getVariable('autoApproveMovies')) {
+					$request->approved = true;
+				}
+				if ($this->Requests->save($request)) {
+					$result['requested'] = 'yes';
+					if($request->approved) {
+						$couchpotato = new CouchPotato(getVariable('couchPotatoUrl'), getVariable('couchPotatoApikey'));
+
+						if($couchpotato->getMovieAdd([
+							'identifier' => $imdbId // IMDB ID
+						])) {
+							$result['approved'] = 'yes';
+						}
+					}
+				}
+			} else {
+				$result['requested'] = 'duplicate';
+			}
+
+		} else {
+			die;
+		}
+
+		$this->response->body(json_encode($result));
+		return $this->response;
+	}
+
+	public function approveMovie()
+	{
+		if ($this->request->is('Ajax')) {
+			$this->autoRender = false;
+			$result = [];
+			$result['success'] = 'no';
+			$imdbId = $this->request->data('imdbId');
+			$couchpotato = new CouchPotato(getVariable('couchPotatoUrl'), getVariable('couchPotatoApikey'));
+
+			if($couchpotato->getMovieAdd([
+				'identifier' => $imdbId // IMDB ID
+			])) {
+				$result['success'] = 'yes';
+			}
+		} else {
+			die;
+		}
+
+		$this->response->body(json_encode($result));
+		return $this->response;
+	}
+
+	public function isAuthorized($user = null)
+	{
+		$action = $this->request->action;
+
+		if ($user['active']) {
+			if (in_array($action, [
+				'add',
+				'queryTv',
+				'queryMovie',
+				'requestMovie',
+				'approveMovie',
+			])) {
+				return true;
+			}
+		}
+		return parent::isAuthorized($user);
 	}
 }

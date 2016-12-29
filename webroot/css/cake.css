@@ -491,7 +491,6 @@ div.message:before {
     left: -11px;
     background-color: #FFF;
     padding: 12px 14px 12px 10px;
-    content: "i";
     color: #a0d3e8;
 }
 
@@ -503,7 +502,6 @@ div.message.error {
 div.message.error:before {
     padding: 11px 16px 14px 7px;
     color: #C3232D;
-    content: "x";
 }
 div.message.hidden {
     height: 0;

@@ -226,7 +226,7 @@ function addMovie(item, index) {
 							item.Title +
 						'</div>' +
 						'<div class="col-xs-4 requestButton">' +
-							'<button class="btn btn-primary">Request</button>' +
+							'<button class="btn btn-primary" onclick="requestMovie(\''+item.imdbID+'\')">Request</button>' +
 						'</div>' +
 					'</div>' +
 					'<div class="row seriesStats">' +
@@ -245,6 +245,43 @@ function addMovie(item, index) {
 		'</div>' +
 		'<hr>'
 	);
+}
+
+function requestMovie(id)
+{
+	$.ajax({
+		type: 'POST',
+		url: '<?php echo $this->Url->build([
+			'controller' => 'Requests',
+			'action' => 'request-movie',
+		]);?>',
+		dataType: 'json',
+		data: {
+			imdbId: id
+		},
+		success: function (response) {
+			if (response) {
+				if (response.requested == "duplicate") {
+					alert("That movie has already been requested.");
+				} else if(response.requested != "yes") {
+					alert("Your request failed.");
+				} else {
+					if(response.approved != "yes") {
+						alert("Your request was received but has not yet been approved.");
+					} else {
+						alert("Your request was received and approved");
+					}
+				}
+			}
+		},
+		error: function (xhr, textStatus, err) {
+			console.log("readyState: " + xhr.readyState);
+			console.log("responseText: " + xhr.responseText);
+			console.log("status: " + xhr.status);
+			console.log("text status: " + textStatus);
+			console.log("error: " + err);
+		}
+	});
 }
 
 </script>

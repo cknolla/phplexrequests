@@ -74,6 +74,10 @@ class RequestsTable extends Table
             ->requirePresence('available', 'create')
             ->notEmpty('available');
 
+		$validator
+			->requirePresence('db_id', 'create')
+			->notEmpty('db_id');
+
         return $validator;
     }
 
