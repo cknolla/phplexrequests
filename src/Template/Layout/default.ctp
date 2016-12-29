@@ -33,8 +33,6 @@ $title = "PHPlexRequests";
 	<!-- Latest compiled and minified CSS -->
 	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 -->
-	<?= $this->Html->css('cake.css'); ?>
-	<?= $this->Html->css('bass.css'); ?>
 	<?= $this->Html->css('bootstrap-slate.css'); ?>
 	<!-- Optional theme -->
 	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -80,6 +78,7 @@ $title = "PHPlexRequests";
 
 			])?>
 		</div>
+		<?php if($user['username'] != ""): ?>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li>
@@ -94,15 +93,27 @@ $title = "PHPlexRequests";
 						'action' => 'index'
 					])?>
 				</li>
+				<li>
+					<a href="https://app.plex.tv/web/app">Plex</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<?= $this->Html->link('Logout', [
+						'controller' => 'Users',
+						'action' => 'logout'
+					])?>
+				</li>
 			</ul>
 		</div><!--/.nav-collapse -->
+		<?php endif; ?>
 
 	</div>
 
 </nav>
 
     <?= $this->Flash->render() ?>
-<div id="alerts" class="alert alert-success hideAlert">test</div>
+<div id="alerts" class="alert hideAlert">test</div>
     <div class="container clearfix">
 
         <?= $this->fetch('content') ?>

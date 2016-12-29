@@ -4,14 +4,23 @@
 	</div>
 	<div class="panel-body">
 		<?= $this->Form->create() ?>
-		<?= $this->Form->input('username') ?>
-		<?= $this->Form->input('password', [
-			'type' => 'password'
-		])?>
-		<?= $this->Form->button('Submit', [
-			'class' => 'btn btn-primary'
-		]) ?>
+		<div class="form-group">
+			<?= $this->Form->input('username', [
+				'label' => 'Plex Username',
+				'class' => 'form-control'
+			]) ?>
+		</div>
+		<div class="form-group">
+			<?= $this->Form->input('password', [
+				'label' => 'Plex Password',
+				'type' => 'password',
+				'class' => 'form-control',
+			])?>
+		</div>
+			<?= $this->Form->button('Submit', [
+				'class' => 'btn btn-primary'
+			]) ?>
+
 		<?= $this->Form->end() ?>
-		<button onclick="showAlert()">Alert</button>
 	</div>
 </div>

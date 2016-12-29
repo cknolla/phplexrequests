@@ -91,8 +91,8 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
-	//	$user = $this->Auth->user();
-	//	$this->set(compact('user'));
+		$user = $this->Auth->user();
+		$this->set(compact('user'));
     }
 
 	public function isAuthorized($user = null)

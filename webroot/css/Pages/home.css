@@ -2,6 +2,10 @@ th {
 	text-align: right;
 }
 
+#dataRatio {
+	font-weight: bold;
+}
+
 P.news-subject {
 	font-weight: bold;
 }

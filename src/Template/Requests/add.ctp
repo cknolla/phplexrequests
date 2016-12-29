@@ -85,7 +85,7 @@
 	$(function() {
 		//setup before functions
 		var typingTimer;                //timer identifier
-		var doneTypingInterval = 1000;  //time in ms (1 seconds)
+		var doneTypingInterval = 500;  //time in ms 
 
 		//on keyup, start the countdown
 		$('#search').keyup(function(){
@@ -183,7 +183,7 @@ function addShow(item, index) {
 							item.seriesName +
 						'</div>' +
 						'<div class="col-xs-4 requestButton">' +
-							'<button class="btn btn-primary">Request</button>' +
+							'<button class="btn btn-primary disabled" data-toggle="tooltip" title="Not done yet :(">Request</button>' +
 						'</div>' +
 					'</div>' +
 					'<div class="row seriesStats">' +
@@ -205,6 +205,7 @@ function addShow(item, index) {
 		'</div>' +
 		'<hr>'
 	);
+	$('[data-toggle="tooltip"]').tooltip();
 }
 
 function addMovie(item, index) {
@@ -262,14 +263,14 @@ function requestMovie(id)
 		success: function (response) {
 			if (response) {
 				if (response.requested == "duplicate") {
-					alert("That movie has already been requested.");
+					showAlert('warn',"That movie has already been requested.");
 				} else if(response.requested != "yes") {
-					alert("Your request failed.");
+					showAlert('error',"Your request failed.");
 				} else {
 					if(response.approved != "yes") {
-						alert("Your request was received but has not yet been approved.");
+						showAlert('success',"Your request was received but has not yet been approved.");
 					} else {
-						alert("Your request was received and approved");
+						showAlert('success',"Your request was received and approved");
 					}
 				}
 			}

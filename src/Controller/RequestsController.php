@@ -19,12 +19,44 @@ class RequestsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users']
-        ];
-        $requests = $this->paginate($this->Requests);
+		$http = new \Cake\Http\Client();
+    	$requests = $this->Requests->find('all', [
+    		'contain' => 'Users'
+		]);
+		$requestDetail = [];
+		foreach($requests as $request) {
+			$response = $http->get('http://www.omdbapi.com/', [
+				'i' => $request->db_id,
+			]);
 
-        $this->set(compact('requests'));
+			$movie = json_decode($response->body);
+			//	debug($results);
+			if(empty($movie->Title)) {
+				$result['error'] = "No results";
+			} else {
+				$result['success'] = 'yes';
+
+				if($movie->Poster != 'N/A') {
+					if(preg_match('/\A.+\/(.+)\Z/', $movie->Poster, $matches)) {
+						$poster = $matches[1];
+						if(!file_exists('img/'. $poster)) {
+							copy($movie->Poster, 'img/_cache/posters/' . $poster);
+							$movie->Poster = '/img/_cache/posters/'.$poster;
+						}
+					}
+
+				}
+				$requestDetail[$request->id] = $movie;
+			}
+		}
+		$this->paginate = [
+			'order' => [
+				'id' => 'desc'
+			], 'limit' => 10,
+		];
+        $requests = $this->paginate($requests);
+
+        $this->set(compact('requests', 'requestDetail'));
         $this->set('_serialize', ['requests']);
     }
 
@@ -273,7 +305,7 @@ class RequestsController extends AppController
 			])->first();
 			if(empty($request)) {
 				$request = $this->Requests->newEntity();
-				$request->user_id = 1;
+				$request->user_id = $this->Auth->user()['id'];
 				$request->db_id = $imdbId;
 				if(getVariable('autoApproveMovies')) {
 					$request->approved = true;
@@ -307,14 +339,21 @@ class RequestsController extends AppController
 		if ($this->request->is('Ajax')) {
 			$this->autoRender = false;
 			$result = [];
-			$result['success'] = 'no';
+			$result['approved'] = 'no';
 			$imdbId = $this->request->data('imdbId');
+			$request = $this->Requests->find('all', [
+				'conditions' => [
+					'db_id' => $imdbId
+				]
+			])->first();
 			$couchpotato = new CouchPotato(getVariable('couchPotatoUrl'), getVariable('couchPotatoApikey'));
 
 			if($couchpotato->getMovieAdd([
 				'identifier' => $imdbId // IMDB ID
 			])) {
-				$result['success'] = 'yes';
+				$request->approved = true;
+				$this->Requests->save($request);
+				$result['approved'] = 'yes';
 			}
 		} else {
 			die;
@@ -330,6 +369,7 @@ class RequestsController extends AppController
 
 		if ($user['active']) {
 			if (in_array($action, [
+				'index',
 				'add',
 				'queryTv',
 				'queryMovie',

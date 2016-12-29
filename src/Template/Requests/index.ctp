@@ -1,43 +1,46 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Request'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Issues'), ['controller' => 'Issues', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Issue'), ['controller' => 'Issues', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+
 <div class="requests index large-9 medium-8 columns content">
-    <h3><?= __('Requests') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('approved') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('available') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($requests as $request): ?>
-            <tr>
-                <td><?= $this->Number->format($request->id) ?></td>
-                <td><?= $request->has('user') ? $this->Html->link($request->user->id, ['controller' => 'Users', 'action' => 'view', $request->user->id]) : '' ?></td>
-                <td><?= h($request->approved) ?></td>
-                <td><?= h($request->available) ?></td>
-                <td><?= h($request->created) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $request->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $request->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $request->id], ['confirm' => __('Are you sure you want to delete # {0}?', $request->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <h2><?= __('Requests') ?></h2>
+
+    <?php foreach($requests as $request): ?>
+		<div class="row request">
+			<div class="col-md-4">
+				<img src="<?=$requestDetail[$request->id]->Poster?>" class="img-responsive">
+			</div>
+			<div class="col-md-4">
+				<div class="row requestTitle">
+					<?=$requestDetail[$request->id]->Title ?>
+				</div>
+				<div class="row">
+					Released: <?= $requestDetail[$request->id]->Released ?>
+				</div>
+				<div class="row">
+					Approved: <?= $request->approved ? 'Yes' : 'No' ?>
+				</div>
+				<!--
+				<div class="row">
+					Available: <?= $request->available ? 'Yes' : 'No' ?>
+				</div>
+				-->
+				<div class="row">
+					Requested: <?= $request->created ?>
+				</div>
+				<div class="row">
+					Requested By: <?= $request->user->username ?>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<?php if($user['id'] == 1): ?>
+				<div class="row">
+					<button class="approve btn btn-success <?= $request->approved ? 'invisible' : ''?>" value="<?=$request->db_id?>">Approve</button>
+				</div>
+				<?php endif; ?>
+
+			</div>
+		</div>
+		<hr>
+	<?php endforeach; ?>
+
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
@@ -49,3 +52,44 @@
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
 </div>
+
+<script>
+	$(function() {
+		$(".approve").click(function() {
+			approve($(this).val());
+		})
+	});
+
+	function approve(id)
+	{
+		$.ajax({
+				type: 'POST',
+			url: '<?php echo $this->Url->build([
+				'controller' => 'Requests',
+				'action' => 'approve-movie',
+			]);?>',
+			dataType: 'json',
+			data: {
+				imdbId: id
+			},
+			success: function (response) {
+				if (response) {
+					if(response.approved != "yes") {
+						showAlert('error',"Error in approval process");
+					} else {
+						showAlert('success',"The request is approved and will be downloaded immediately if available.");
+					}
+				}
+			},
+			error: function (xhr, textStatus, err) {
+				console.log("readyState: " + xhr.readyState);
+				console.log("responseText: " + xhr.responseText);
+				console.log("status: " + xhr.status);
+				console.log("text status: " + textStatus);
+				console.log("error: " + err);
+			}
+		});
+
+	};
+
+</script>

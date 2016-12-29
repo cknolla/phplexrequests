@@ -59,7 +59,9 @@ class PagesController extends AppController
 
         $newsStories = \Cake\ORM\TableRegistry::get('News')->find('all');
 
-        $this->set(compact('page', 'subpage', 'newsStories'));
+		$dataRatio = getVariable('dataRatio');
+
+        $this->set(compact('page', 'subpage', 'newsStories', 'dataRatio'));
 
         try {
             $this->render(implode('/', $path));

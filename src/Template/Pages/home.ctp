@@ -6,19 +6,27 @@
 		<table class="table table-striped table-hover">
 			<tr>
 				<th>Data Used</th>
-				<td id="dataUsed">100 GiB of 1024 GiB</td>
+				<td id="dataUsed"><?= getVariable('dataUsed')?> GiB of 1024 GiB</td>
 			</tr>
 			<tr>
 				<th>% Data Used</th>
-				<td id="percentDataUsed">56.2%</td>
+				<td id="percentDataUsed"><?=getVariable('dataUsedPercent')?>%</td>
 			</tr>
 			<tr>
 				<th>% Month Complete</th>
-				<td id="percentMonthComplete">72.6%</td>
+				<td id="percentMonthComplete"><?=getVariable('monthProgressPercent')?>%</td>
 			</tr>
 			<tr>
 				<th>Ratio</th>
-				<td id="ratio">1.15</td>
+				<td id="dataRatio" style="color: <?php
+				if($dataRatio < 0.9) {
+					echo "green";
+				} else if($dataRatio < 1.0) {
+					echo "yellow";
+				} else {
+					echo "red";
+				}
+			?>"><?=$dataRatio?></td>
 			</tr>
 		</table>
 	</div>
