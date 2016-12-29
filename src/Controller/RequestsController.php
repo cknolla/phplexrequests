@@ -203,4 +203,56 @@ class RequestsController extends AppController
 		$this->response->body(json_encode($result));
 		return $this->response;
 	}
+
+	public function queryMovie()
+	{
+		if ($this->request->is('Ajax')) {
+			$this->autoRender = false;
+			$result = [];
+			$result['success'] = 'no';
+			$searchString = $this->request->data('searchString');
+
+			$http = new \Cake\Http\Client();
+			$response = $http->get('http://www.omdbapi.com/', [
+				's' => $searchString,
+				'type' => 'movie',
+			]);
+
+			$results = json_decode($response->body);
+		//	debug($results);
+			if(empty($results->Search)) {
+				$result['error'] = "No results";
+			} else {
+				$result['success'] = 'yes';
+				foreach ($results->Search as $item) {
+					if($item->Type != 'movie') {
+						continue;
+					}
+					if($item->Poster != 'N/A') {
+						if(preg_match('/\A.+\/(.+)\Z/', $item->Poster, $matches)) {
+							$poster = $matches[1];
+							if(!file_exists('img/'. $poster)) {
+								copy($item->Poster, 'img/_cache/posters/' . $poster);
+								$item->Poster = '/img/_cache/posters/'.$poster;
+							}
+						}
+
+					}
+
+					$detailResponse = $http->get('http://www.omdbapi.com/', [
+						't' => $item->Title,
+					]);
+					$detailResult = json_decode($detailResponse->body);
+					$item->Genre = $detailResult->Genre;
+					$item->Plot = $detailResult->Plot;
+					$result['movies'][] = $item;
+				}
+			}
+		} else {
+			die;
+		}
+
+		$this->response->body(json_encode($result));
+		return $this->response;
+	}
 }

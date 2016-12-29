@@ -1,3 +1,24 @@
+#search-prompt {
+	margin-bottom: 1rem;
+}
+
+.switch {
+	font-size: 2rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
+	margin-top: 1rem;
+	cursor: pointer;
+}
+
+.pressed {
+	border-style: inset;
+	border-width: 0px 0px 2px 0;
+	border-color: goldenrod;
+/*	transition: border-width 0.3s; */
+}
+
 div.search-result {
 	margin-left: auto;
 	margin-right: auto;

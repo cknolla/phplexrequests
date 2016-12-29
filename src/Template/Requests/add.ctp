@@ -15,6 +15,8 @@
 			]);
 			?>
 			<div id="search-prompt"></div>
+			<span id="movie-switch" class="switch pressed">Movie</span>
+			<span id="tv-switch" class="switch">TV</span>
 	</div>
 
 	<div id="search-results">
@@ -68,6 +70,18 @@
 		return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
 	}
 
+	$("#movie-switch").click(function() {
+		$("#search").val('');
+		$("#movie-switch").addClass('pressed');
+		$("#tv-switch").removeClass('pressed');
+	});
+
+	$("#tv-switch").click(function() {
+		$("#search").val('');
+		$("#tv-switch").addClass('pressed');
+		$("#movie-switch").removeClass('pressed');
+	});
+
 	$(function() {
 		//setup before functions
 		var typingTimer;                //timer identifier
@@ -86,38 +100,69 @@
 			$("#search-results").empty();
 			$("#search-prompt").empty();
 			$("#search-prompt").append("Searching...");
-			$.ajax({
-				type: 'POST',
-				url: '<?php echo $this->Url->build([
-					'controller' => 'Requests',
-					'action' => 'query-tv',
-					//	'_ext' => 'json'
-				])
-				;?>',
-				dataType: 'json',
-				data: {
-					searchString: $("#search").val()
-				},
-				success: function (response) {
-					$("#search-prompt").empty();
-					if (response) {
-						if (response.success != "yes") {
-							$("#search-prompt").append(response.error);
-						} else {
-							response.shows.forEach(addShow);
+			if($("#tv-switch").hasClass('pressed')) {
+				$.ajax({
+					type: 'POST',
+					url: '<?php echo $this->Url->build([
+						'controller' => 'Requests',
+						'action' => 'query-tv',
+						//	'_ext' => 'json'
+					]);?>',
+					dataType: 'json',
+					data: {
+						searchString: $("#search").val()
+					},
+					success: function (response) {
+						$("#search-prompt").empty();
+						if (response) {
+							if (response.success != "yes") {
+								$("#search-prompt").append(response.error);
+							} else {
+								response.shows.forEach(addShow);
+							}
 						}
+					},
+					error: function (xhr, textStatus, err) {
+						console.log("readyState: " + xhr.readyState);
+						console.log("responseText: " + xhr.responseText);
+						console.log("status: " + xhr.status);
+						console.log("text status: " + textStatus);
+						console.log("error: " + err);
 					}
-				},
-				error: function (xhr, textStatus, err) {
-					console.log("readyState: " + xhr.readyState);
-					console.log("responseText: " + xhr.responseText);
-					console.log("status: " + xhr.status);
-					console.log("text status: " + textStatus);
-					console.log("error: " + err);
-				}
-			});
+				});
+			} else {
+				$.ajax({
+					type: 'POST',
+					url: '<?php echo $this->Url->build([
+						'controller' => 'Requests',
+						'action' => 'query-movie',
+						//	'_ext' => 'json'
+					]);?>',
+					dataType: 'json',
+					data: {
+						searchString: $("#search").val()
+					},
+					success: function (response) {
+						$("#search-prompt").empty();
+						if (response) {
+							if (response.success != "yes") {
+								$("#search-prompt").append(response.error);
+							} else {
+								response.movies.forEach(addMovie);
+							}
+						}
+					},
+					error: function (xhr, textStatus, err) {
+						console.log("readyState: " + xhr.readyState);
+						console.log("responseText: " + xhr.responseText);
+						console.log("status: " + xhr.status);
+						console.log("text status: " + textStatus);
+						console.log("error: " + err);
+					}
+				});
+			}
 		}
-	})
+	});
 
 function addShow(item, index) {
 	if(item.poster == null) {
@@ -133,31 +178,73 @@ function addShow(item, index) {
 					'<img src="/img/' + item.poster + '" class="img-responsive">' +
 				'</div>' +
 				'<div class="col-md-8">' +
-				'<div class="row">' +
-					'<div class="col-xs-8 seriesName">' +
-						item.seriesName +
+					'<div class="row">' +
+						'<div class="col-xs-8 seriesName">' +
+							item.seriesName +
+						'</div>' +
+						'<div class="col-xs-4 requestButton">' +
+							'<button class="btn btn-primary">Request</button>' +
+						'</div>' +
 					'</div>' +
-					'<div class="col-xs-4 requestButton">' +
-						'<button class="btn btn-primary">Request</button>' +
+					'<div class="row seriesStats">' +
+						'<div class="col-xs-4 firstAired">' +
+							item.firstAired.substring(0,4) +
+						'</div>' +
+						'<div class="col-xs-4 network">' +
+							item.network +
+						'</div>' +
+						'<div class="col-xs-4 status">' +
+							item.status +
+						'</div>' +
 					'</div>' +
-				'</div>' +
-				'<div class="row seriesStats">' +
-					'<div class="col-xs-4 firstAired">' +
-						item.firstAired.substring(0,4) +
+					'<div class="row">' +
+						nl2br(item.overview) +
 					'</div>' +
-					'<div class="col-xs-4 network">' +
-						item.network +
-					'</div>' +
-					'<div class="col-xs-4 status">' +
-						item.status +
-					'</div>' +
-				'</div>' +
-				'<div class="row">' +
-					nl2br(item.overview) +
 				'</div>' +
 			'</div>' +
 		'</div>' +
-		'<hr>');
+		'<hr>'
+	);
+}
+
+function addMovie(item, index) {
+	if(item.Poster == 'N/A') {
+		item.Poster = '/img/no_image.png';
+	}
+	if(item.Plot == 'N/A') {
+		item.Plot = 'No description available.';
+	}
+	$('#search-results').append('' +
+		'<div class="search-result">' +
+			'<div class="row">' +
+				'<div class="col-md-4">' +
+					'<img src="' + item.Poster + '" class="img-responsive">' +
+				'</div>' +
+				'<div class="col-md-8">' +
+					'<div class="row">' +
+						'<div class="col-xs-8 seriesName">' +
+							item.Title +
+						'</div>' +
+						'<div class="col-xs-4 requestButton">' +
+							'<button class="btn btn-primary">Request</button>' +
+						'</div>' +
+					'</div>' +
+					'<div class="row seriesStats">' +
+						'<div class="col-xs-6 firstAired">' +
+							item.Year +
+						'</div>' +
+						'<div class="col-xs-6 network">' +
+							item.Genre +
+						'</div>' +
+					'</div>' +
+					'<div class="row">' +
+						nl2br(item.Plot) +
+					'</div>' +
+				'</div>' +
+			'</div>' +
+		'</div>' +
+		'<hr>'
+	);
 }
 
 </script>
